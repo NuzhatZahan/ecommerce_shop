@@ -47,15 +47,50 @@ class CategoryController extends Controller
     {
         echo "$category_id";
         DB::table('category')->where('category_id', $category_id)->update(['status'=>null]);
-        session()->put('message', "Category active successfully");
+        session()->put('message', "Category inactive successfully");
         return redirect('/all_category');
 
 
     }
     public function active_category($category_id)
     {
-        echo "$category_id";
+        //echo "$category_id";
         DB::table('category')->where('category_id', $category_id)->update(['status'=>'on']);
+        session()->put('message', "Category active successfully");
+        return redirect('/all_category');
+    }
+
+    public function edit_category($category_id)
+    {
+        $category_info=DB::table('category')->where('category_id', $category_id)->first();
+        $category_edit = view('admin.edit_category')->with('category_info', $category_info);
+        session()->put('message', "Category updated successfully");
+
+         return view('admin.admin_layouts.main')->with('admin.edit_category', $category_edit);
+    }
+
+    public function update_category(Request $request, $category_id)
+    {
+        $data = array();
+        $data['category_name']=$request->category_name;
+        $data['category_description']=$request->category_description;
+
+        DB::table('category')->where('category_id', $category_id)->update($data);
+
+
+        session()->put('message', "Category is updated successfully");
+        return redirect('/all_category');
+
+    }
+
+    public function delete_category($category_id)
+    {
+        //$data = Category::find($category_id);
+       // if(!is_null($data))
+       //   $data->delete();
+
+        DB::table('category')->where('category_id', $category_id)->delete();
+        session()->put('message', "Category is deleted successfully");
         return redirect('/all_category');
     }
 
