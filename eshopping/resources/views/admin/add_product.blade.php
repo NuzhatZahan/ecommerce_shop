@@ -37,7 +37,7 @@
 
                         </div>
                         <div class="box-content">
-                            <form class="form-horizontal" action ="{{url('save_product')}}" method="post" enctype="multipart/form.data">
+                            <form class="form-horizontal" action ="{{url('save_product')}}" method="post" enctype="multipart/form-data">
                                 @csrf
                               <fieldset>
 
@@ -51,14 +51,14 @@
                                 <div class="control-group">
                                     <label class="control-label" for="selectError3">Product Category</label>
                                     <div class="controls">
-                                      <select id="selectError3">
+                                      <select id="selectError3" name="category_id">
                                         <option>Select category...</option>
                                             <?php
                                                 $all_publish_category =DB::table('category')->where('status','on')->get();
                                                 foreach ($all_publish_category as $category) {
                                                 # code.  ?>
 
-                                                    <option value="$category->category_id">{{$category->category_name}}</option>
+                                                    <option value="{{$category->category_id}}">{{$category->category_name}}</option>
 
                                             <?php }  ?>
                                       </select>
@@ -68,14 +68,14 @@
                                   <div class="control-group">
                                     <label class="control-label" for="selectError3">Product Brands</label>
                                     <div class="controls">
-                                        <select id="selectError3">
+                                        <select id="selectError3" name="brand_id">
                                             <option>Select brands...</option>
                                             <?php
                                                 $all_publish_brands =DB::table('brands')->where('status','on')->get();
                                                 foreach ($all_publish_brands as $brands) {
                                                 # code.  ?>
 
-                                                    <option value="$brand->brand_id">{{$brands->brand_name}}</option>
+                                                    <option value="{{$brands->brand_id}}">{{$brands->brand_name}}</option>
 
                                             <?php }  ?>
 
@@ -128,7 +128,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Publication Status</label>
                                     <div class="controls">
-                                      <input type="checkbox" name="publication status">
+                                      <input type="checkbox" name="publication_status">
                                     </div>
                                   </div>
 
