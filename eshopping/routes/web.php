@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
-
+use App\Http\Controllers\ProductController;
 
 
 
@@ -54,3 +54,7 @@ Route::get('/inactive_brands/{brand_id}', [BrandController::class, 'inactive_bra
 Route::get('/edit_brands/{brand_id}', [BrandController::class,  'edit_brands']);
 Route::post('/update_brands/{brand_id}', [BrandController::class, 'update_brands']);
 Route::get('/delete_brands/{brand_id}', [BrandController::class, 'delete_brands']);
+
+//product_routes//
+Route::get('/add_product', [ProductController::class, 'index']);
+Route::post('/save_product', [ProductController::class, 'save_product']);
