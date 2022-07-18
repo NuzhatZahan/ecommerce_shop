@@ -34,7 +34,7 @@ class ProductController extends Controller
       //  print_r($image);
         $image = $request->file('product_image');
         if($image){
-            $image_name = $image.time();
+            $image_name =time();
             $ext = strtolower($image->getClientOriginalExtension());
             $image_full_name = $image_name.'.'.$ext;
             $upload_path ='image/';
@@ -45,8 +45,7 @@ class ProductController extends Controller
                 $data->save();
                 session()->put('message', "Productis added successfully");
                 return redirect('/add_product');
-               //echo '<pre>';
-               //print_r($data);
+
             }
 
         }
@@ -54,6 +53,80 @@ class ProductController extends Controller
         session()->put('message', "Product is added successfully without image");
         return redirect('/add_product');
 
+
+    }
+
+    public function all_product()
+    {
+        $all_product_info=DB::table('products')
+                            ->join('category', 'products.category_id','=','category.category_id')
+                            ->join('brands', 'products.brand_id','=','brands.brand_id')
+                            ->get();
+        //echo"<pre>";
+       //print_r($all_product_info);
+       //$all_product_info = Product::get();
+        $manage_product = view('admin.all_product')->with('all_product_info', $all_product_info);
+
+       return view('admin.admin_layouts.main')->with('admin.all_product', $manage_product);
+    }
+
+    public function inactive_product($product_id)
+    {
+        //echo "$category_id";
+        DB::table('products')->where('product_id', $product_id)->update(['publication_status'=>0]);
+        session()->put('message', "Product inactive successfully");
+        return redirect('/all_product');
+
+
+    }
+    public function active_product($product_id)
+    {
+        //echo "$category_id";
+        DB::table('products')->where('product_id', $product_id)->update(['publication_status'=>'on']);
+        session()->put('message', "Product active successfully");
+        return redirect('/all_product');
+
+
+    }
+
+    public function delete_product($product_id)
+    {
+        DB::table('products')->where('product_id', $product_id)->delete();
+        session()->put('message', "Product is deleted successfully");
+        return redirect('/all_product');
+    }
+
+    public function edit_product($product_id)
+    {
+        $product_info=DB::table('products')->where('product_id', $product_id)->first();
+        $product_edit = view('admin.edit_product')->with('product_info', $product_info);
+        session()->put('message', "Product updated successfully");
+
+         return view('admin.admin_layouts.main')->with('admin.edit_product', $product_edit);
+    }
+
+    public function update_product(Request $request, $product_id)
+    {
+        //$data = array();
+        //$data['product_name']=$request->category_name;
+       // $data['category_description']=$request->category_description;
+
+       //DB::table('category')->where('category_id', $category_id)->update($data);
+        $data = Product::find($product_id);
+       $data->product_id=$request['product_id'];
+       $data->category_id=$request['category_id'];
+       $data->brand_id=$request['brand_id'];
+       $data->product_name=$request['product_name'];
+       $data->product_short_description=$request['product_short_description'];
+       $data->product_long_description=$request['product_long_description'];
+       $data->product_size=$request['product_size'];
+       $data->product_price=$request['product_price'];
+       $data->product_color=$request['product_color'];
+       $data->publication_status=$request['publication_status'];
+       $data->save();
+
+        session()->put('message', "Category is updated successfully");
+        return redirect('/all_category');
 
     }
 }

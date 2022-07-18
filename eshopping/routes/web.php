@@ -57,4 +57,10 @@ Route::get('/delete_brands/{brand_id}', [BrandController::class, 'delete_brands'
 
 //product_routes//
 Route::get('/add_product', [ProductController::class, 'index']);
+Route::get('/all_product', [ProductController::class, 'all_product']);
 Route::post('/save_product', [ProductController::class, 'save_product']);
+Route::get('/active_product/{product_id}', [ProductController::class, 'active_product']);
+Route::get('/inactive_product/{product_id}', [ProductController::class, 'inactive_product']);
+Route::get('/delete_product/{product_id}',[ProductController::class, 'delete_product']);
+Route::get('/edit_product/{product_id}', [ProductController::class, 'edit_product']);
+Route::post('/update_product/{product_id}',[ProductController::class,'update_product']);
