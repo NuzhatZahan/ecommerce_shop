@@ -24,7 +24,7 @@ return new class extends Migration
             $table->float("product_price");
             $table->string("product_color");
             $table->string("product_image");
-            $table->string("publication_status")->default(0);
+            $table->string("publication_status")->default('off');
             $table->timestamps();
         });
     }

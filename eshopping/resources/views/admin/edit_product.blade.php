@@ -36,7 +36,7 @@
 
             </div>
             <div class="box-content">
-                <form class="form-horizontal" action ="{{url('update_product')}}" method="post" enctype="multipart/form-data">
+                <form class="form-horizontal" action ="{{url('update_product', $product_info->product_id)}}" method="post" enctype="multipart/form-data">
                     @csrf
                   <fieldset>
 
@@ -92,7 +92,9 @@
                     <div class="control-group hidden-phone">
                         <label class="control-label">Product long Description</label>
                         <div class="controls">
-                          <textarea class="cleditor" name="product_long_description" rows="3" ></textarea>
+                          <textarea class="cleditor" name="product_long_description" rows="1" >
+                            {{$product_info->product_short_description}}
+                        </textarea>
                         </div>
                     </div>
 

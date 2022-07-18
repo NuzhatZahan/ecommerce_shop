@@ -84,7 +84,9 @@
               </table>
             </div>
         </div><!--/span-->
-
+        <div class="row">
+            {{ $all_category_info->links() }}
+        </div>
     </div><!--/row-->
 
 </div><!--/.fluid-container-->

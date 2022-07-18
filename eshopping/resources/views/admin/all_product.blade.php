@@ -97,10 +97,17 @@
 
                   @endforeach
 
-              </table>
-            </div>
-        </div><!--/span-->
 
+              </table>
+
+            </div>
+
+
+
+        </div><!--/span-->
+        <div class="row">
+            {{ $all_product_info->links() }}
+        </div>
     </div><!--/row-->
 
 </div><!--/.fluid-container-->

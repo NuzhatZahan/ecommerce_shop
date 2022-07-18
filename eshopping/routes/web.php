@@ -7,7 +7,7 @@ use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
-
+use App\Http\Controllers\SliderController;
 
 
 /*
@@ -25,13 +25,20 @@ use App\Http\Controllers\ProductController;
     return view('index');
 });*/
 
+///frontend///
 Route::get('/', [IndexController::class, 'index']);
+Route::get('/product-by-category/{category_id}', [IndexController::class, 'product_by_category']);
+Route::get('/product-by-brand/{brand_id}', [IndexController::class, 'product_by_brand']);
+Route::get('/view-product/{product_id}', [IndexController::class, 'view_product']);
+
+
+
 
 
 
 //backend//
 Route::get('/admin', [AdminController::class, 'index']);
-Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
+Route::get('/dashboard', [SuperAdminController::class, 'index']);
 Route::post('/admin_dashboard', [AdminController::class, 'dashboard']);
 Route::get('/logout', [SuperAdminController::class, 'logout']);
 
@@ -64,3 +71,11 @@ Route::get('/inactive_product/{product_id}', [ProductController::class, 'inactiv
 Route::get('/delete_product/{product_id}',[ProductController::class, 'delete_product']);
 Route::get('/edit_product/{product_id}', [ProductController::class, 'edit_product']);
 Route::post('/update_product/{product_id}',[ProductController::class,'update_product']);
+
+//slider_routes//
+Route::get('/add_slider', [SliderController::class, 'index']);
+Route::get('/all_slider', [SliderController::class, 'all_slider']);
+Route::post('/save_slider', [SliderController::class, 'save_slider']);
+Route::get('/active_slider/{slider_id}', [SliderController::class, 'active_slider']);
+Route::get('/inactive_slider/{slider_id}', [SliderController::class, 'inactive_slider']);
+Route::get('/delete_slider/{slider_id}', [SliderController::class, 'delete_slider']);

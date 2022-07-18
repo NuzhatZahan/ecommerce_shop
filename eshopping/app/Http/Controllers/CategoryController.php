@@ -2,25 +2,41 @@
 
 namespace App\Http\Controllers;
 
+//use App\Http\Controllers\SuperAdminController;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Category;
+
 use DB;
 use session;
-
+session_start();
 class CategoryController extends Controller
 {
+    public function AdminAuthCheck()
+    {
+        $admin_id = session()->get('admin_id');
+        if ($admin_id) {
+            return;
+        }
+        else{
+          return redirect('/admin')->send();
+        }
+    }
+
     public function index()
     {
+        $this->AdminAuthCheck();
         return view('admin.add_category');
     }
 
     public function all_category()
     {
+        $this->AdminAuthCheck();
        $all_category_info = Category::get();
        //echo "<pre>";
        //print_r( $all_category_info);
        $manage_category = view('admin.all_category')->with('all_category_info', $all_category_info);
-
+       $all_category_info = Product::paginate(10);
        return view('admin.admin_layouts.main')->with('admin.all_category', $manage_category);
     }
 
@@ -62,6 +78,7 @@ class CategoryController extends Controller
 
     public function edit_category($category_id)
     {
+        $this->AdminAuthCheck();
         $category_info=DB::table('category')->where('category_id', $category_id)->first();
         $category_edit = view('admin.edit_category')->with('category_info', $category_info);
         session()->put('message', "Category updated successfully");

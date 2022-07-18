@@ -3,21 +3,37 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Brand;
 use DB;
-
+use session;
+session_start();
 class BrandController extends Controller
 {
+
+    public function AdminAuthCheck()
+    {
+        $admin_id = session()->get('admin_id');
+        if ($admin_id) {
+            return;
+        }
+        else{
+          return redirect('/admin')->send();
+        }
+    }
+
     public function index()
     {
+        $this->AdminAuthCheck();
         return view('admin.add_brands');
     }
 
     public function all_brands()
     {
+        $this->AdminAuthCheck();
        $all_brand_info = Brand::get();
        $manage_brand = view('admin.all_brands')->with('all_brand_info', $all_brand_info);
-
+       $all_brand_info = Product::paginate(10);
        return view('admin.admin_layouts.main')->with('admin.all_brands', $manage_brand);
     }
 
@@ -58,6 +74,7 @@ class BrandController extends Controller
 
     public function edit_brands($brand_id)
     {
+        $this->AdminAuthCheck();
         $brand_info=DB::table('brands')->where('brand_id', $brand_id)->first();
         $brand_edit = view('admin.edit_brands')->with('brand_info', $brand_info);
         session()->put('message', "Category is updated successfully");
