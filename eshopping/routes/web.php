@@ -8,6 +8,11 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckOutController;
+
+
+
 
 
 /*
@@ -32,8 +37,12 @@ Route::get('/product-by-brand/{brand_id}', [IndexController::class, 'product_by_
 Route::get('/view-product/{product_id}', [IndexController::class, 'view_product']);
 
 
+Route::post('/add-to-cart', [CartController::class, 'add_to_cart']);
+Route::get('/show-cart', [CartController::class, 'show_cart']);
+Route::get('/delete-to-cart/{id}', [CartController::class, 'delete_cart']);
+Route::post('/update-cart/{id}', [CartController::class, 'update_cart']);
 
-
+Route::get('/check-out',[CheckOutController::class, 'index']);
 
 
 //backend//

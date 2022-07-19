@@ -15,22 +15,30 @@
             <div class="product-information"><!--/product-information-->
                 <img src="images/product-details/new.jpg" class="newarrival" alt="" />
                 <h2>{{$product_details->product_name}}</h2>
-                <p>Color: {{$product_details->product_color}}</p>
                 <img src="{{url('frontend/images/product-details/rating.png')}}" alt="" />
-                <span>
-                    <span>BDT {{$product_details->product_price}}</span>
-                    <label>Quantity:</label>
-                    <input type="text" value="" />
-                    <label>Size:</label>
-                    <input type="textarea" class="input-xlarge" value="{{$product_details->product_size}}"/>
-                    <button type="button" class="btn btn-default cart">
-                        <i class="fa fa-shopping-cart"></i>
-                        Add to cart
-                    </button>
-                </span>
+                <p>Color: {{$product_details->product_color}}</p>
+                <p>Available Size: {{$product_details->product_size}}</p>
                 <p><b>Availability:</b> In Stock</p>
                 <p><b>Condition:</b> New</p>
                 <p><b>Brand:</b> {{$product_details->brand_name}}</p>
+                <span>
+                    <span>BDT {{$product_details->product_price}}</span>
+                    <form action="{{url('add-to-cart')}}" method="post">
+                        @csrf
+                        <p>
+                            <label>Quantity:</label>
+                            <input type="text" name="qty" value="1" />
+                            <label>Size:</label>
+                            <input type="text" name="size" value=""/>
+                            <input type="hidden" name ="product_id" value="{{$product_details->product_id}}" />
+                        </p>
+                        <button type="submit" class="btn btn-default cart">
+                            <i class="fa fa-shopping-cart"></i>
+                            Add to cart
+                        </button>
+
+                    </form>
+                </span>
             </div><!--/product-information-->
         </div>
     </div><!--/product-details-->

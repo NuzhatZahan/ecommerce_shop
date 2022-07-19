@@ -1,3 +1,7 @@
+</div>
+</div>
+</section>
+
 <footer id="footer"><!--Footer-->
     <div class="footer-top">
         <div class="container">
