@@ -48,7 +48,7 @@ class IndexController extends Controller
        //echo "$brand_id";
 
        $all_brand_product=DB::table('products')
-                            ->join('brands', 'products.brand_id','=','brands.brand_id')
+                            ->join('category', 'products.category_id','=','category.category_id')
                             ->join('brands', 'products.brand_id','=','brands.brand_id')
                             ->select('products.*', 'category.*', 'brands.*')
                             ->where('publication_status','on')

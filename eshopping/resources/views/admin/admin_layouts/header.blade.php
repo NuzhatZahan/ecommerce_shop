@@ -361,9 +361,10 @@
 
                                 </ul>
                             </li>
+                            <li><a href="{{url('/customer_order')}}"><i class="icon-list-alt"></i><span class="hidden-tablet">Customer Order</span></a></li>
                             <li><a href="chart.html"><i class="icon-list-alt"></i><span class="hidden-tablet"> Social Link</span></a></li>
                             <li><a href="typography.html"><i class="icon-font"></i><span class="hidden-tablet"> Shop Name</span></a></li>
-                            <li><a href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Delivery Man</span></a></li>
+                            <li><a href="gallery.html"><i class="icon-picture"></i><span class="hidden-tablet"> Delivery People</span></a></li>
 
                         </ul>
                     </div>

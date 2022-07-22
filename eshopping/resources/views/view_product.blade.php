@@ -1,6 +1,6 @@
 @extends('layouts.master')
+@include('layouts.sidemenu')
 @section('main-section')
-
 <div class="col-sm-9 padding-right">
     <div class="product-details"><!--product-details-->
         <div class="col-sm-5">

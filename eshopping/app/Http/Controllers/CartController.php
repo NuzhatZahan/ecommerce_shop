@@ -51,7 +51,7 @@ class CartController extends Controller
     {
 
         $id = $request->id;
-        Cart::update($id, array('quantity' => null,));
+        Cart::update($id, array('quantity' => 0,));
         $qty = $request->quantity;
 
         Cart::update($id, array('quantity' => $qty,));

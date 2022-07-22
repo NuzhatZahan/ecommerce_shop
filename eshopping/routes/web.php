@@ -10,9 +10,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckOutController;
-
-
-
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ShippingController;
+use App\Http\Controllers\OrderController;
 
 
 /*
@@ -30,22 +30,36 @@ use App\Http\Controllers\CheckOutController;
     return view('index');
 });*/
 
-///frontend///
+                          //frontend///
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/product-by-category/{category_id}', [IndexController::class, 'product_by_category']);
 Route::get('/product-by-brand/{brand_id}', [IndexController::class, 'product_by_brand']);
 Route::get('/view-product/{product_id}', [IndexController::class, 'view_product']);
 
-
+///Cart Routes
 Route::post('/add-to-cart', [CartController::class, 'add_to_cart']);
 Route::get('/show-cart', [CartController::class, 'show_cart']);
 Route::get('/delete-to-cart/{id}', [CartController::class, 'delete_cart']);
 Route::post('/update-cart/{id}', [CartController::class, 'update_cart']);
 
+
+//check-out routes//
 Route::get('/check-out',[CheckOutController::class, 'index']);
+Route::get('/login-check',[CheckOutController::class, 'login_check']);
 
+//customer rotues
+Route::post('/customer-register',[CustomerController::class, 'customer_register']);
+Route::post('/customer-login',[CustomerController::class, 'login']);
+Route::get('/customer-logout',[CustomerController::class, 'logout']);
 
-//backend//
+//Shipping ROutes
+Route::post('/add-shipping', [ShippingController::class, 'add_shipping']);
+
+//Payment Routes
+Route::get('/payment',[CheckOutController::class, 'payment']);
+Route::post('/order-place',[CheckOutController::class, 'order_place']);
+
+                            //backend//
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/dashboard', [SuperAdminController::class, 'index']);
 Route::post('/admin_dashboard', [AdminController::class, 'dashboard']);
@@ -88,3 +102,11 @@ Route::post('/save_slider', [SliderController::class, 'save_slider']);
 Route::get('/active_slider/{slider_id}', [SliderController::class, 'active_slider']);
 Route::get('/inactive_slider/{slider_id}', [SliderController::class, 'inactive_slider']);
 Route::get('/delete_slider/{slider_id}', [SliderController::class, 'delete_slider']);
+
+
+//order_routes//
+Route::get('/customer_order', [OrderController::class, 'index']);
+Route::get('/view_order/{order_id}', [OrderController::class, 'view_order']);
+Route::get('/active_order/{order_id}', [OrderController::class, 'activeorder']);
+Route::get('/inactive_order/{order_id}', [OrderController::class, 'inactive_order']);
+Route::get('/delete_order/{order_id}', [OrderController::class, 'delete_order']);

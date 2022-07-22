@@ -78,6 +78,7 @@ class ProductController extends Controller
         $all_product_info=DB::table('products')
                             ->join('category', 'products.category_id','=','category.category_id')
                             ->join('brands', 'products.brand_id','=','brands.brand_id')
+                            ->select('products.*', 'category.category_name', 'brands.brand_name')
                             ->get();
         //echo"<pre>";
        //print_r($all_product_info);
